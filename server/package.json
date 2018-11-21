@@ -17,5 +17,8 @@
     "koa-session-minimal": "^3.0.4",
     "koa-static": "^5.0.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "css-loader": "^1.0.1",
+    "style-loader": "^0.23.1"
+  }
 }

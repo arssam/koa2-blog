@@ -36,6 +36,17 @@ app.use(session({
   cookie: cookie
 }))
 
+// 处理跨域 记得一定要await next()
+app.use(async (ctx, next) => {
+  ctx.response.set({
+    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
+    'Access-Control-Allow-Headers': 'X-PINGOTHER, Content-Type',
+    'Access-Control-Max-Age': '86400'
+  })
+  await next()
+})
+
 // 静态资源目录对于相对入口文件index.js的路径
 const staticPath = './static'
 
