@@ -4,7 +4,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "nodemon app.js"
   },
   "author": "",
   "license": "ISC",
@@ -12,6 +12,7 @@
     "busboy": "^0.2.14",
     "koa": "^2.6.2",
     "koa-bodyparser": "^4.2.1",
+    "koa-cors": "^0.0.16",
     "koa-mysql-session": "^0.0.2",
     "koa-router": "^7.4.0",
     "koa-session-minimal": "^3.0.4",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "css-loader": "^1.0.1",
+    "nodemon": "^1.18.7",
     "style-loader": "^0.23.1"
   }
 }

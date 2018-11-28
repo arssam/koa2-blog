@@ -1,11 +1,10 @@
+// node服务器只渲染index.html，路由功能在前端编写
 const router = require('koa-router')()
 
-const home = require('./home')
-const api = require('./api')
-const page = require('./page')
+const upload = require('./upload')
+const user = require('./user')
 
-router.use('/', home.routes(), home.allowedMethods())
-router.use('/api', api.routes(), api.allowedMethods())
-router.use('/page', page.routes(), page.allowedMethods())
+router.use('/upload', upload.routes(), upload.allowedMethods())
+router.use('/user', user.routes(), user.allowedMethods())
 
 module.exports = router

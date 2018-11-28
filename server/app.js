@@ -4,6 +4,7 @@ const bodyParser = require('koa-bodyparser')
 const static = require('koa-static')
 const session = require('koa-session-minimal')
 const MysqlSession = require('koa-mysql-session')
+const path = require('path')
 
 // 使用ctx.body解析中间件
 app.use(bodyParser())
@@ -31,21 +32,11 @@ let cookie = {
 
 // 使用session中间件
 app.use(session({
-  key: 'SESSION_ID',
+  key: 'SESSION_IDS',
   store: store,
   cookie: cookie
 }))
 
-// 处理跨域 记得一定要await next()
-app.use(async (ctx, next) => {
-  ctx.response.set({
-    'Access-Control-Allow-Origin': '*',
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS, PUT, DELETE',
-    'Access-Control-Allow-Headers': 'X-PINGOTHER, Content-Type',
-    'Access-Control-Max-Age': '86400'
-  })
-  await next()
-})
 
 // 静态资源目录对于相对入口文件index.js的路径
 const staticPath = './static'
@@ -54,10 +45,12 @@ app.use(static(
   path.join( __dirname,  staticPath)
 ))
 
-const router = require('../routes')
+const routes = require('./routes')
 
 // 加载路由中间件
-app.use(router.routes()).use(router.allowedMethods())
+app
+  .use(routes.routes())
+  .use(routes.allowedMethods())
 
 app.listen(2001, () => {
   console.log('app start at port 2001')
