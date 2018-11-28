@@ -9,10 +9,10 @@ router.get('/getUserList', async ctx => {
 
 router.post('/signup', async ctx => {
   let sql = 'INSERT INTO USER(name,age,sex) VALUES(?,?,?)'
-  const postData = ctx.request.body
-  const addParams = [postData.name, postData.age, postData.sex]
-  let dataList = await handleSql( sql, addParams )
-  ctx.body = dataList
+  const { name, age, sex } = ctx.request.body
+  const addParams = [name, age, sex]
+  await handleSql( sql, addParams )
+  ctx.body = {}
 })
 
 module.exports = router
