@@ -12,7 +12,7 @@ router.post('/signup', async ctx => {
   const { name, age, sex } = ctx.request.body
   const addParams = [name, age, sex]
   await handleSql( sql, addParams )
-  ctx.body = {}
+  ctx.body = null
 })
 
 module.exports = router
