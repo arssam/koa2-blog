@@ -6,7 +6,7 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    index: './src/index.tsx'
+    index: './src/App.tsx'
   },
   output: {
     filename: '[name].js',
@@ -43,22 +43,28 @@ module.exports = {
               publicPath: 'assets/'
           }
         },
-        {
-          test: /\.(png|jpe?g|gif)$/,
-          use: {
-              loader: 'url-loader',
-              options:{
-                // name 同flie-loader
-                name:'[path][name][hash:8].[ext]',
-                // 小于10000字节的转换为DataUrl格式
-                limit:10000,
-                // 是否采用file-loader， 默认采用
-                // 还可以用responsive-loader等一些其他loader
-                fallback: 'file-loader',
-                // 设置要处理的MIME类型，
-                mimetype:'image/png',
-              }
-          }
+      },
+      {
+        // test 表示测试什么文件类型
+        test:/\.css$/,
+        // 使用 'style-loader','css-loader'
+        use:['style-loader','css-loader']
+      },
+      {
+        test: /\.(png|jpe?g|gif)$/,
+        use: {
+            loader: 'url-loader',
+            options:{
+              // name 同flie-loader
+              name:'[path][name][hash:8].[ext]',
+              // 小于10000字节的转换为DataUrl格式
+              limit:10000,
+              // 是否采用file-loader， 默认采用
+              // 还可以用responsive-loader等一些其他loader
+              fallback: 'file-loader',
+              // 设置要处理的MIME类型，
+              mimetype:'image/png',
+            }
         }
       }
     ]
