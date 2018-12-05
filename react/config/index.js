@@ -1,7 +1,8 @@
 const path = require('path')
 
 module.exports = {
-  build: {},
+  build: {
+  },
   dev: {
     port: process.env.PORT || 5000,
   }

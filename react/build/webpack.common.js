@@ -1,4 +1,5 @@
 const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -14,7 +15,7 @@ module.exports = {
     publicPath: '/'
   },
   resolve: {
-    extensions: ['.tsx', '.ts', '.js'],
+    extensions: ['.tsx', '.ts', '.js', '.less'],
     alias: {
       '@': resolve('src'),
     }
@@ -27,8 +28,15 @@ module.exports = {
         exclude: /node_modules/
       },
       {
-        test: /\.less$/,
-        use: ['style-loader', 'css-loader', 'less-loader']
+        // test 表示测试什么文件类型
+        test:/\.(css|less)$/,
+        // 使用 'style-loader','css-loader'
+        // https://segmentfault.com/a/1190000015237322
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'less-loader'
+        ],
       },
       {
         test: /\.(png|jpe?g|gif)$/,
@@ -43,12 +51,6 @@ module.exports = {
               publicPath: 'assets/'
           }
         },
-      },
-      {
-        // test 表示测试什么文件类型
-        test:/\.css$/,
-        // 使用 'style-loader','css-loader'
-        use:['style-loader','css-loader']
       },
       {
         test: /\.(png|jpe?g|gif)$/,
