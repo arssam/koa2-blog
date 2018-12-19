@@ -33,7 +33,6 @@ module.exports = {
         // 使用 'style-loader','css-loader'
         // https://segmentfault.com/a/1190000015237322
         use: [
-          MiniCssExtractPlugin.loader,
           'css-loader',
           'less-loader'
         ],

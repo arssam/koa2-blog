@@ -11,6 +11,10 @@ Object.keys(common.entry).forEach(function (name) {
 })
 
 module.exports = merge(common, {
+  //开发环境下默认启用cache，在内存中对已经构建的部分进行缓存
+  //避免其他模块修改，但是该模块未修改时候，重新构建，能够更快的进行增量构建
+  //属于空间换时间的做法
+  cache: true, 
   devtool: 'inline-source-map',
   mode: 'development',
   plugins: [
