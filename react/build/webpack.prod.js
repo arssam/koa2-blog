@@ -5,6 +5,9 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin')
+const ProgressBarPlugin = require('progress-bar-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const path = require('path');
 // const config = require('../config')
 
@@ -32,6 +35,12 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'source-map',
   plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css',
+    }),
+    // https://segmentfault.com/a/1190000016816813
+    // 编译进度条插件
+    new ProgressBarPlugin(),
     new CleanWebpackPlugin(['../dist']),
     new HtmlWebpackPlugin({
       filename: path.resolve(__dirname, '../dist/index.html'),
@@ -55,6 +64,8 @@ module.exports = merge(common, {
     // }),
     new webpack.HashedModuleIdsPlugin(),
     // 使用 ParallelUglifyPlugin 并行压缩输出JS代码
+    // https://www.jianshu.com/p/3b9a19e5cead
+    // 压缩速度贼给力
     new ParallelUglifyPlugin({
       // 传递给 UglifyJS的参数如下：
       uglifyJS: {
@@ -100,10 +111,10 @@ module.exports = merge(common, {
   optimization: {
     minimizer: [
       new UglifyJsPlugin({
-        cache: true,
-        parallel: true,
-        sourceMap: true, // set to true if you want JS source maps
-        uglifyOptions: {
+        cache: true, // 开启缓存
+        parallel: true, // 开启多线程编译
+        sourceMap: true, // 是否sourceMap
+        uglifyOptions: { // 丑化参数
           compress: {
             warnings: false,
             drop_debugger: true,

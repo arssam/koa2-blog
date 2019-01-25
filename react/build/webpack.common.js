@@ -1,5 +1,4 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 function resolve(dir) {
   return path.join(__dirname, '..', dir)
@@ -7,7 +6,7 @@ function resolve(dir) {
 
 module.exports = {
   entry: {
-    index: './src/App.tsx'
+    index: './src/index.tsx'
   },
   output: {
     filename: '[name].js',
